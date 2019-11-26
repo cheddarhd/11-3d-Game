@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/World.gd" type="Script" id=1]
+[ext_resource path="res://Assets/GLTF format/chair.glb" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Chair.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Sink.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/Hole.gd" type="Script" id=5]
+
+[node name="World" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19503, -0.00757742, 0.111263 )
+script = ExtResource( 1 )
+
+[node name="Stuff" parent="." instance=ExtResource( 2 )]
+
+[node name="Chair" parent="Stuff" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00396931, -0.0151547, 0.00726557 )
+
+[node name="Sink" parent="Stuff" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.810009, 0.168418, -0.547351 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 5, 5 )
+
+[node name="Ground" type="CSGBox" parent="."]
+use_collision = true
+width = 20.0
+height = 0.2
+depth = 20.0
+
+[node name="Hole" type="CSGCylinder" parent="Ground"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0 )
+operation = 2
+radius = 0.1
+sides = 40
+script = ExtResource( 5 )
